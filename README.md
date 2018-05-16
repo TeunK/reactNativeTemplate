@@ -2,9 +2,24 @@
 
 ## Tech
 
-- REALM: Internal device storage
+- [React Native](https://facebook.github.io/react-native/)
+- [Realm](https://realm.io/) (Internal device db storage)
 
-## Project Layout / Structure
+## Core Structure
+
+* `project..`
+	* *App.js*
+	* *index.js*
+	* *package.json*
+	* `/android..`
+	* `/ios..`
+	* `/app..`
+		* `screens..`
+		* `components..`
+		* `config..`
+		* `actions..`
+		* `reducers..`
+		* `lib..`
 
 ## Installation
 
@@ -17,15 +32,15 @@
 5) Map environment variable: `PATH` to `C:\Program Files\Genymobile\Genymotion\tools` or where-ever this genymotion folder is located
 6) Map environment variable: `ANDROID_HOME` to `C:\Program Files (x86)\Android\android-sdk` or where-ever the android-sdk folder is installed
 7) Start the Android SDK Manager (*C:\Program Files (x86)\Android\android-sdk*) and install:
-	<br/>- *Tools > Android SDK Tools*
-	<br/>- *Tools > Android SDK Platform-tools*
-	<br/>- *Android SDK Build-tools*
-	<br/>- Android `<ANDROID_VERSION>` (API `<API_VERSION>`) > SDK Platform
-	<br/>- Android `<ANDROID_VERSION>` (API `<API_VERSION>`) > Intel x86 Atom_64 System Image
-	<br/>- Android `<ANDROID_VERSION>` (API `<API_VERSION>`) > Intel x86 Atom System Image
-	<br/>- Extra > Android Support Repository
-	<br/>***NOTE:** Ensure the `Android API` matches on the `Android SDK Build-tools` & `Android SDK Platform-tools`*
-	<br/>***NOTE:** Ensure the `Android API` version also matches that of the version you wish to use on the (GenyMotion) emulator*
+	* ***Tools** > Android SDK Tools*
+	* ***Tools** > Android SDK Platform-tools*
+	* ***Tools** > Android SDK Build-tools*
+	* ***Android** `[ANDROID_VERSION]` **(API** `[API_VERSION]`**)** > SDK Platform*
+	* ***Android** `[ANDROID_VERSION]` **(API** `[API_VERSION]`**)** > Intel x86 Atom_64 System Image*
+	* ***Android** `[ANDROID_VERSION]` **(API** `[API_VERSION]`**)** > Intel x86 Atom System Image*
+	* ***Extra** > Android Support Repository*
+	* ***NOTE:** Ensure the `[API_VERSION]` matches on the `Android SDK Build-tools` & `Android SDK Platform-tools`*
+	* ***NOTE:** Ensure the `[API_VERSION]` version also matches that of the version you wish to use on the (GenyMotion) emulator*
 	<br/>![SDK Requited Installations](https://i.gyazo.com/831f7ddb89fd9ca5fcc0437fd06be868.png)
 7) clone this project repository
 8) inside the project folder, run `npm install`
@@ -35,8 +50,8 @@
 ## Startup
 
 1) Ensure the (Genymotion) emulator is started
-2) inside `/demoProject`, run react-native run-android
-3) now the project should start running on the emulator (refer to installation for any issues)
+2) Inside `/demoProject`, run: `react-native run-android`
+3) Now the project should start running on the emulator (refer to installation for any issues)
 
 ## Deployment
 
