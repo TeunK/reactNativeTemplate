@@ -26,7 +26,7 @@
 *Ensure to run as `Administrator` mode everywhere to prevent weird problems*
 
 1) Download & Install [Node.js](https://nodejs.org/en/)
-2) Download & Install the Android SDK (can be found on the [android dev website](`https://developer.android.com/studio/`)
+2) Download & Install the [Android SDK](https://developer.android.com/studio/)
 3) Download & Install [GenyMotion](https://www.genymotion.com/)
 4) Add new Virtual Machine on GenyMotion. <br/>***Note:** It is important to keep track of the software API version (higher = newer features supported, lower = compatible with more devices). The API version is required for the right SDK versions (future step)*
 5) Map environment variable: `PATH` to `C:\Program Files\Genymobile\Genymotion\tools` or where-ever this genymotion folder is located
