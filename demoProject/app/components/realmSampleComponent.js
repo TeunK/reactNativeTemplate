@@ -26,7 +26,7 @@ export default class RealmSampleComponent extends Component {
 		};
 		await LocalDataStorage.save(ItemSchema, sampleItem);
 		const randomItems = await LocalDataStorage.get(ItemSchema);
-		// await LocalDataStorage.wipe(ItemSchema, sampleItem);
+		await LocalDataStorage.wipe(ItemSchema);
 
 		this.setState({sampleValues: randomItems});
 	}

@@ -22,7 +22,27 @@ export default LocalDataStorage = {
 		return Realm.open({schema: [schema]})
 			.then(realm => {
 				realm.write(() => {
-					realm.remove(instance);
+					let instances = realm.objects(schema.name).filtered('name = $0',instance.name);
+					realm.delete(instances);
+				})
+			})
+	},
+	removeWhere: (schema, filterQuery) => {
+		alert(filterQuery);
+		return Realm.open({schema: [schema]})
+			.then(realm => {
+				realm.write(() => {
+					let instances = realm.objects(schema.name).filtered(filterQuery);
+					realm.delete(instances);
+				})
+			})
+	},
+	wipe: (schema) => {
+		return Realm.open({schema: [schema]})
+			.then(realm => {
+				realm.write(() => {
+					let allInstances = realm.objects(schema.name);
+					realm.delete(allInstances);
 				})
 			})
 	}
