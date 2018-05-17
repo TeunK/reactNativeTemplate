@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react';
-import Realm from 'realm';
+// import Realm from 'realm';
 import {
 	StyleSheet,
 	Text,
 	View
 } from 'react-native';
-import {ItemSchema} from "../domain/itemSchema";
-import LocalDataStorage from "../lib/storage/datastorage";
+// import {ItemSchema} from "../domain/itemSchema";
+// import LocalDataStorage from "../lib/storage/datastorage";
 
 export default class RealmSampleComponent extends Component {
 
@@ -17,19 +17,25 @@ export default class RealmSampleComponent extends Component {
 			sampleValues: []
 		};
 	}
-
-	async componentWillMount() {
-		const sampleItem = {
-			name: 'SomeItem',
-			dateAdded: new Date(),
-			pictures: []
-		};
-		await LocalDataStorage.save(ItemSchema, sampleItem);
-		const randomItems = await LocalDataStorage.get(ItemSchema);
-		await LocalDataStorage.wipe(ItemSchema);
-
-		this.setState({sampleValues: randomItems});
-	}
+	//
+	// async refresh() {
+	// 	const randomItems = await LocalDataStorage.get(ItemSchema);
+	// }
+	//
+	// async addItem() {
+	// 	const sampleItem = {
+	// 		name: 'SomeItem',
+	// 		dateAdded: new Date(),
+	// 		pictures: []
+	// 	};
+	// 	await LocalDataStorage.save(ItemSchema, sampleItem);
+	// 	this.setState({sampleValues: randomItems});
+	// }
+	//
+	// async wipe() {
+	// 	await LocalDataStorage.wipe(ItemSchema);
+	// 	this.setState({sampleValues: []});
+	// }
 
 	render() {
 		const itemsList = this.state.sampleValues.map((item,id) => {
