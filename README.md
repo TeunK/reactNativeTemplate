@@ -1,9 +1,17 @@
 # Personal React Native Startup Template
 
+***Initialised with*** `react-native init`.
+
+Note difference between
+- `react-native init`
+- `create-react-native-app`
+
 ## Tech
 
 - [React Native](https://facebook.github.io/react-native/)
 - [Realm](https://realm.io/) (Internal device db storage)
+- [React Native Elements](https://react-native-training.github.io/react-native-elements/)
+
 
 ## Core Structure
 
@@ -60,3 +68,9 @@ This will come whenever it is production-worthy
 ## Notes
 
 This works best with GenyMotion as emulator, since Realm may not be supported everywhere.
+
+## Styling
+
+#### List of HTML equivalents
+- `<div>` ***vs*** `<View>`
+- `<span>` ***vs*** `<Text>`

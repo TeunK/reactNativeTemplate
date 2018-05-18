@@ -2,12 +2,13 @@ import React from 'react';
 import RealmSampleComponent from "../components/realmSampleComponent";
 
 import {
-	Button,
 	Platform,
 	StyleSheet,
 	Text,
 	View
 } from 'react-native';
+import {Button, ButtonGroup} from 'react-native-elements';
+
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' +
@@ -27,8 +28,24 @@ export default class HomeScreen extends React.Component {
 		}
 	};
 
+	constructor () {
+		super()
+		this.state = {
+			selectedIndex: 2
+		}
+		this.updateIndex = this.updateIndex.bind(this)
+	}
+
+	updateIndex (selectedIndex) {
+		this.setState({selectedIndex})
+	}
+
+
 	render() {
 		const {navigate} = this.props.navigation;
+
+		const buttons = ['Hello', 'World', 'Buttons']
+		const { selectedIndex } = this.state
 
 		return (
 			<View style={styles.container}>
@@ -44,6 +61,28 @@ export default class HomeScreen extends React.Component {
 				</Text>
 				<RealmSampleComponent></RealmSampleComponent>
 
+				<ButtonGroup
+					onPress={this.updateIndex}
+					selectedIndex={selectedIndex}
+					buttons={buttons}
+					containerStyle={{height: 20}}
+				/>
+
+				<View style={{height:40}}>
+					<Button
+						buttonStyle={{height:20}}
+						backgroundColor="#012051"
+						icon={{name: 'squirrel', type: 'octicon'}}
+						title='Some button' />
+				</View>
+
+
+				<Button
+					small
+					rounded
+					backgroundColor="#CCC"
+					iconRight={{name: 'code'}}
+					title='LARGE WITH RIGHT ICON' />
 
 				<View style={{margin:10}}>
 					<Button title='Dashboard' onPress={() => navigate('Dashboard', {})} margin={20}/>
