@@ -56,7 +56,11 @@ export default class HomeScreen extends React.Component {
 				<View style={{margin:10}}>
 					<Button title='Signin' onPress={() => navigate('Signin', {})}/>
 				</View>
-				
+
+				<View style={{margin:10}}>
+					<Button title='Items List' onPress={() => navigate('ItemsList', {})}/>
+				</View>
+
 			</View>
 		);
 	}
