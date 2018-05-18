@@ -12,7 +12,8 @@ export default class DashboardScreen extends React.Component {
 		},
 		headerTitleStyle: {
 			color: '#FFF'
-		}
+		},
+		headerTintColor: '#FFF'
 	};
 
 	render() {
