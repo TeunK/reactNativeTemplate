@@ -63,11 +63,28 @@ Note difference between
 
 ## Deployment
 
-This will come whenever it is production-worthy
+#### This will come whenever it is production-worthy
+
+#### Debugging using a physical device
+1) Enable debugging over usb
+	- `settings` -> `about phone` -> tap `build number` 7x -> back to `settings` -> `developer options` -> enable `USB debugging`
+2) Plug in device through USB cable
+3) On console, run `adb devices`, see if `device` is displayed.
+	- ***Note:** You may still have to accept the connection request message on the phone*
+	- ***Note:** Make sure only **one** device is connected*
+4) Run `react-native run-android` to load the app on the phone
+5) Make sure the computer and phone are connected to the same wifi network
+6) Shake the device to open the admin panel
+7) Open `Dev Settings` -> `Debug server for host device`
+8) Enter computer's IP address and port *(eg. 192.168.1.1:8081)*(run `ipconfig` in console to obtain)
+9) Now you can reload updates wirelessly through the `admin panel` -> `Reload JS` button.
+
 
 ## Notes
 
-This works best with GenyMotion as emulator, since Realm may not be supported everywhere.
+- This works best with GenyMotion as emulator, since Realm may not be supported everywhere.
+
+- To clean the build, in the root folder, enter `cd android` and run `./gradlew clean`
 
 ## Styling
 
