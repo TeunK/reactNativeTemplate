@@ -83,8 +83,8 @@ Note difference between
 ## Notes
 
 - This works best with GenyMotion as emulator, since Realm may not be supported everywhere.
-
 - To clean the build, in the root folder, enter `cd android` and run `./gradlew clean`
+- Run `adb logcat` along with the running setup to see live logs (debugging)
 
 ## Styling
 
