@@ -14,7 +14,6 @@ const AppNavigator = createBottomTabNavigator({
 		Dashboard: {screen: DashboardScreen},
 		Profile: {screen: ProfileScreen},
 		Signin: {screen: SigninScreen},
-		ItemsList: {screen: ItemsList}
 	}, NavigationBarOptions
 );
 

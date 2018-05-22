@@ -61,7 +61,7 @@ export default class HomeScreen extends React.Component {
 	];
 
 	bla = () => {
-		alert("ok");
+		this.props.navigation.navigate('NewItemForm');
 	};
 
 	render() {
