@@ -6,7 +6,7 @@ import {
 	ScrollView,
 	View
 } from 'react-native';
-import {CardComponent} from "./TitleCardComponent";
+import CardComponent from "./CardComponent";
 import {Tile} from "react-native-elements";
 
 

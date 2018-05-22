@@ -2,22 +2,11 @@
  * Created by Teun on 16-5-2018.
  */
 import React from 'react';
-import {Button, Text, View, StyleSheet} from "react-native";
+import {Text, View, StyleSheet} from "react-native";
 import CameraComponent from "../components/CameraComponent";
-import SimpleCameraComponent from "../components/SimpleCameraComponent";
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
 
 class ProfileScreen extends React.Component {
-	static navigationOptions = {
-		title: 'Profile',
-		headerStyle: {
-			backgroundColor: '#212121'
-		},
-		headerTitleStyle: {
-			color: '#FFF'
-		}
-	};
-
 	constructor(props) {
 		super(props);
 		this.state = {

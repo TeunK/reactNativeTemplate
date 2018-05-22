@@ -3,17 +3,10 @@
  */
 import React from 'react';
 import {Button, Text, View} from "react-native";
+import newItemsFormHeaderOptions from "../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
 
 export default class NewItemForm extends React.Component {
-	static navigationOptions = {
-		title: 'Register New Item',
-		headerStyle: {
-			backgroundColor: '#212121'
-		},
-		headerTitleStyle: {
-			color: '#FFF'
-		}
-	};
+	static navigationOptions = newItemsFormHeaderOptions;
 	render() {
 		return (
 			<View>

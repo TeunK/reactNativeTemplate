@@ -2,23 +2,19 @@
  * Created by Teun on 16-5-2018.
  */
 import React from 'react';
-import {Button, Text, View} from "react-native";
-import {TitleCardComponent, CardComponent} from "../components/TitleCardComponent";
-import OptionsMenuComponent from "../components/OptionsMenuComponent";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import NewItemForm from "./Forms/NewItemForm";
+import NewItemForm from "../screens/Forms/NewItemForm";
 import {StackNavigator} from 'react-navigation';
-import NewItemGroupForm from "./Forms/NewItemGroupForm";
-import ItemsList from "./itemsList";
-import Dashboard from "./Forms/Dashboard";
+import NewItemGroupForm from "../screens/Forms/NewItemGroupForm";
+import ItemsListScreen from "../screens/ItemsListScreen";
+import DashboardScreen from "../screens/DashboardScreen";
 
-export default DashboardScreen = StackNavigator({
-		Dashboard: {screen: Dashboard },
+export default DashboardNavigator = StackNavigator({
+		DashboardScreen: {screen: DashboardScreen },
 		NewItemForm: {screen: NewItemForm},
 		NewGroupForm: {screen: NewItemGroupForm},
-		ViewAll: {screen: ItemsList},
+		ItemsListScreen: {screen: ItemsListScreen},
 	}, {
-		initialRouteName: 'Dashboard',
+		initialRouteName: 'DashboardScreen',
 		transitionConfig: () => ({
 			screenInterpolator: sceneProps => {
 				const { layout, position, scene } = sceneProps;

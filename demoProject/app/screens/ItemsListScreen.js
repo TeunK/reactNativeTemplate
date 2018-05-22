@@ -2,11 +2,11 @@
  * Created by Teun on 16-5-2018.
  */
 import React from 'react';
-import {Button, Text, View} from "react-native";
+import { Text, View} from "react-native";
 
-export default class SigninScreen extends React.Component {
+export default class ItemsListScreen extends React.Component {
 	static navigationOptions = {
-		title: 'Signin',
+		title: 'Items List',
 		headerStyle: {
 			backgroundColor: '#212121'
 		},
@@ -17,7 +17,7 @@ export default class SigninScreen extends React.Component {
 	render() {
 		return (
 			<View>
-				<Text>signin</Text>
+				<Text>this is my items list page</Text>
 			</View>
 		)
 	}

@@ -3,17 +3,11 @@
  */
 import React from 'react';
 import {Button, Text, View} from "react-native";
+import newItemGroupFormHeaderOptions from "../../config/navigationOptionHeaders/newItemGroupFormHeaderOptions";
 
 export default class NewItemGroupForm extends React.Component {
-	static navigationOptions = {
-		title: 'Signin',
-		headerStyle: {
-			backgroundColor: '#212121'
-		},
-		headerTitleStyle: {
-			color: '#FFF'
-		}
-	};
+	static navigationOptions = newItemGroupFormHeaderOptions;
+
 	render() {
 		return (
 			<View>
