@@ -4,7 +4,7 @@
 import React from 'react';
 import {Button, Text, View} from "react-native";
 
-export default class NewItemForm extends React.Component {
+export default class NewItemGroupForm extends React.Component {
 	static navigationOptions = {
 		title: 'Signin',
 		headerStyle: {
@@ -17,7 +17,7 @@ export default class NewItemForm extends React.Component {
 	render() {
 		return (
 			<View>
-				<Text>signin</Text>
+				<Text>register new item GROUP form</Text>
 			</View>
 		)
 	}

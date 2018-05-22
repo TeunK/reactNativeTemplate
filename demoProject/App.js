@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import HomeScreen from "./app/screens/home";
-import DashboardScreen from "./app/screens/dashboard";
+import DashboardScreen from "./app/screens/dashboardNav";
 import ProfileScreen from "./app/screens/profile";
 import SigninScreen from "./app/screens/signin";
 import {StackNavigator, createBottomTabNavigator} from 'react-navigation';

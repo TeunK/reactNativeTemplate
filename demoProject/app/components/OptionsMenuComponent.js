@@ -16,6 +16,7 @@ const OptionsMenuComponent = ({menuItems}) => (
 				key={i}
 				title={item.title}
 				leftIcon={{ name: item.icon }}
+				onPress={item.clickFunction}
 			/>
 		))
 	}
