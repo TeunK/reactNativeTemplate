@@ -1,13 +1,11 @@
 import React from 'react';
-import RealmSampleComponent from "../components/realmSampleComponent";
 
 import {
-	Platform,
+	Platform, ScrollView,
 	StyleSheet,
-	Text,
-	View
 } from 'react-native';
-import {Button, ButtonGroup} from 'react-native-elements';
+import { TitleCardComponent} from "../components/TitleCardComponent";
+import {RegisteredItemsScrollerComponent} from "../components/RegisteredItemsComponent";
 
 
 const instructions = Platform.select({
@@ -29,10 +27,10 @@ export default class HomeScreen extends React.Component {
 	};
 
 	constructor () {
-		super()
+		super();
 		this.state = {
 			selectedIndex: 2
-		}
+		};
 		this.updateIndex = this.updateIndex.bind(this)
 	}
 
@@ -41,66 +39,49 @@ export default class HomeScreen extends React.Component {
 	}
 
 
+	itemsList = [
+		{
+			name: "purple crayons"
+		},
+		{
+			name: "pillow"
+		},
+		{
+			name: "planttub"
+		},
+		{
+			name: "glass window"
+		},
+		{
+			name: "windsor castle"
+		},
+		{
+			name: "extra long name to see what happens when this thing gets cropped"
+		}
+	];
+
+	bla = () => {
+		alert("ok");
+	};
+
 	render() {
 		const {navigate} = this.props.navigation;
 
-		const buttons = ['Hello', 'World', 'Buttons']
-		const { selectedIndex } = this.state
+		const buttons = ['Hello', 'World', 'Buttons'];
+		const { selectedIndex } = this.state;
 
 		return (
-			<View style={styles.container}>
+			<ScrollView>
 
-				<Text style={styles.welcome}>
-					Welcome to React Native!
-				</Text>
-				<Text style={styles.instructions}>
-					To get started, edit App.js
-				</Text>
-				<Text style={styles.instructions}>
-					{instructions}
-				</Text>
-				<RealmSampleComponent></RealmSampleComponent>
-
-				<ButtonGroup
-					onPress={this.updateIndex}
-					selectedIndex={selectedIndex}
-					buttons={buttons}
-					containerStyle={{height: 20}}
+				<TitleCardComponent
+					img={require('../files/images/deedee.jpg')}
+					header="Home"
+					content="This is where you can find the items you have recorded"
 				/>
 
-				<View style={{height:40}}>
-					<Button
-						buttonStyle={{height:20}}
-						backgroundColor="#012051"
-						icon={{name: 'squirrel', type: 'octicon'}}
-						title='Some button' />
-				</View>
-
-
-				<Button
-					small
-					rounded
-					backgroundColor="#CCC"
-					iconRight={{name: 'code'}}
-					title='LARGE WITH RIGHT ICON' />
-
-				<View style={{margin:10}}>
-					<Button title='Dashboard' onPress={() => navigate('Dashboard', {})} margin={20}/>
-				</View>
-
-				<View style={{margin:10}}>
-					<Button title='Profile' onPress={() => navigate('Profile', {})}/>
-				</View>
-
-				<View style={{margin:10}}>
-					<Button title='Signin' onPress={() => navigate('Signin', {})}/>
-				</View>
-
-				<View style={{margin:10}}>
-					<Button title='Items List' onPress={() => navigate('ItemsList', {})}/>
-				</View>
-
-			</View>
+				<RegisteredItemsScrollerComponent itemsList={this.itemsList} clickFunction={this.bla}/>
+				<RegisteredItemsScrollerComponent itemsList={this.itemsList}/>
+			</ScrollView>
 		);
 	}
 }
@@ -121,5 +102,9 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#333333',
 		marginBottom: 5,
+	},
+	smallTile: {
+		width:20,
+		height:20
 	}
 });

@@ -26,5 +26,5 @@ export default NavigationBarOptions = {
 	tabBarOptions: {
 		activeTintColor: 'tomato',
 		inactiveTintColor: 'gray',
-	},
+	}
 };
