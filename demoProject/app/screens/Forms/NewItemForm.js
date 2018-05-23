@@ -5,8 +5,9 @@
 
 import React from 'react';
 import t from 'tcomb-form-native';
-import {AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image, Button} from 'react-native';
 import stylesheet from 'tcomb-form-native/lib/stylesheets/bootstrap';
+import ImagePicker from 'react-native-image-picker';
 
 const Form = t.form.Form;
 t.form.Form.stylesheet = stylesheet;
@@ -28,11 +29,25 @@ const options = {
 	}
 };
 
+var imgoptions = {
+	title: 'Select Avatar',
+	customButtons: [
+		{name: 'fb', title: 'Choose Photo from Facebook'},
+	],
+	storageOptions: {
+		skipBackup: true,
+		path: 'images'
+	}
+};
+
 export default class NewItemForm extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.getValues = this.getValues.bind(this)
+		this.state = {
+			avatarSource: {}
+		}
 	}
 
 	getValues = () => {
@@ -54,6 +69,32 @@ export default class NewItemForm extends React.Component {
 		this.setState({ value: null });
 	};
 
+	pickImage = () => {
+		ImagePicker.showImagePicker(imgoptions, (response) => {
+			console.log('Response = ', response);
+
+			if (response.didCancel) {
+				console.log('User cancelled image picker');
+			}
+			else if (response.error) {
+				console.log('ImagePicker Error: ', response.error);
+			}
+			else if (response.customButton) {
+				console.log('User tapped custom button: ', response.customButton);
+			}
+			else {
+				let source = { uri: response.uri };
+
+				// You can also display the image using data:
+				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+				this.setState({
+					avatarSource: source
+				});
+			}
+		});
+	};
+
 	render = () => {
 		return (
 			<View style={styles.container}>
@@ -63,6 +104,9 @@ export default class NewItemForm extends React.Component {
 					type={Person}
 					options={options}
 				/>
+				<Button title="Image" onPress={this.pickImage}/>
+				<Image source={this.state.avatarSource} style={{width:50,height:50}} />
+
 				<TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
 					<Text style={styles.buttonText}>Save</Text>
 				</TouchableHighlight>
