@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Text, View, StyleSheet} from "react-native";
-import CameraComponent from "../components/CameraComponent";
+import SimpleCameraComponent from "../components/SimpleCameraComponent";
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
 
 class ProfileScreen extends React.Component {
@@ -40,7 +40,7 @@ class ProfileScreen extends React.Component {
 	}
 
 	render() {
-		let cameraComponent = this.state.showCamera ? <CameraComponent/> : <Text>INVISIBLE</Text>;
+		let cameraComponent = this.state.showCamera ? <SimpleCameraComponent/> : <Text>INVISIBLE</Text>;
 		return (
 			<View style={styles.container}>
 				{cameraComponent}

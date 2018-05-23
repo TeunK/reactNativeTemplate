@@ -9,6 +9,7 @@ import {
 	View
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import fileManager from '../lib/storage/fileManager';
 
 export default class SimpleCameraComponent extends Component {
 	render() {
@@ -39,8 +40,8 @@ export default class SimpleCameraComponent extends Component {
 	takePicture = async function() {
 		if (this.camera) {
 			const options = { quality: 0.5, base64: true };
-			const data = await this.camera.takePictureAsync(options)
-			console.log(data.uri);
+			const data = await this.camera.takePictureAsync(options);
+			await fileManager.writeToMemory(data);
 		}
 	};
 }

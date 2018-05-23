@@ -7,7 +7,7 @@ import {
 	View
 } from 'react-native';
 // import {ItemSchema} from "../domain/itemSchema";
-// import LocalDataStorage from "../lib/storage/datastorage";
+// import LocalDataStorage from "../lib/storage/localDataStorage";
 
 export default class RealmSampleComponent extends Component {
 
