@@ -23,14 +23,6 @@ export class RegisteredItemsScrollerComponent extends React.Component {
 
 				<Image source={{uri: item.image}} style={{flex:4}}/>
 				<Text style={{fontSize:8, flex:1}}>{item.name}</Text>
-				{/*<Tile*/}
-					{/*imageSrc={{uri: item.image}}*/}
-					{/*title={item.name ? item.name : ''}*/}
-					{/*titleStyle={{fontSize:8, textAlign:"left", fontWeight:"100"}}*/}
-					{/*width={100}*/}
-					{/*height={100}*/}
-					{/*containerStyle={{backgroundColor:"#EEE", margin:10, marginBottom:20}}*/}
-				{/*/>*/}
 			</TouchableOpacity>
 		);
 

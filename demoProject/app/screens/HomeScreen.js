@@ -89,7 +89,7 @@ class HomeScreen extends React.Component {
 				{/*)}*/}
 
 
-				{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images} clickFunction={this.openProfileScreen}/>}
+				{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images} clickFunction={this.openNewItemForm}/>}
 				<ItemScrollerComponent itemsList={itemsList}/>
 				{/*<RegisteredItemsScrollerComponent itemsList={itemsList}/>*/}
 				{/*<RegisteredItemsScrollerComponent itemsList={itemsList} clickFunction={() => {alert("hi")}}/>*/}

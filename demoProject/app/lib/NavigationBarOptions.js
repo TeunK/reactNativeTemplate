@@ -19,7 +19,7 @@ export default NavigationBarOptions = {
 			// You can return any component that you like here! We usually use an
 			// icon component from react-native-vector-icons
 			return <Ionicons name={iconName} size={25} color={tintColor} />;
-		},
+		}
 	}),
 	tabBarOptions: {
 		activeTintColor: 'tomato',
