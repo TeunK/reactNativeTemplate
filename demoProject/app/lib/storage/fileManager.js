@@ -7,7 +7,20 @@ import RNFetchBlob from 'react-native-fetch-blob'
 import Constants from "../../config/constants";
 
 export default fileManager = {
-	writeToMemory: writeToMemory
+	writeToMemory: writeToMemory,
+	loadImage: loadImage
+}
+
+async function loadImage(uri) {
+	return RNFetchBlob.fs.readFile(uri, 'base64')
+		.then((img) => {
+			return img;
+		})
+		.catch((err) => {
+			alert("err: " + err);
+		});
+	// alert(image.url);
+	// return image;
 }
 
 async function writeToMemory(fileData) {
