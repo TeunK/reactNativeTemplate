@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native'
+import {View, Text, TouchableOpacity} from 'react-native'
 import {Card, Icon} from 'react-native-elements'
+import TouchableItem from "react-navigation/src/views/TouchableItem";
 
 export default CardComponent = ({header, content, iconCallback}) => (
 	<View>
@@ -10,13 +11,12 @@ export default CardComponent = ({header, content, iconCallback}) => (
 					<Text>{header}</Text>
 				</View>
 				{
-					iconCallback && <Icon
+					iconCallback && <TouchableOpacity onPress={iconCallback}><Icon
 						raised
 						size={12}
 						name='plus'
 						type='font-awesome'
-						color='#5bad4c'
-						onPress={iconCallback} />
+						color='#5bad4c'/></TouchableOpacity>
 				}
 			</View>
 			{content}
