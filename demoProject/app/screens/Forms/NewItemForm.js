@@ -5,12 +5,13 @@
 
 import React from 'react';
 import t from 'tcomb-form-native';
-import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image, Button} from 'react-native';
-import stylesheet from 'tcomb-form-native/lib/stylesheets/bootstrap';
+import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import customFormStyle from '../../config/formStyles'
+import newItemsFormHeaderOptions from "../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
+import {Button} from "react-native-elements";
 
 const Form = t.form.Form;
-t.form.Form.stylesheet = stylesheet;
 
 // here we are: define your domain model
 const Person = t.struct({
@@ -21,6 +22,7 @@ const Person = t.struct({
 });
 
 const options = {
+	stylesheet: customFormStyle,
 	auto: 'placeholders',
 	fields: {
 		name: {
@@ -41,6 +43,7 @@ var imgoptions = {
 };
 
 export default class NewItemForm extends React.Component {
+	static navigationOptions = newItemsFormHeaderOptions;
 
 	constructor(props) {
 		super(props);
@@ -104,12 +107,10 @@ export default class NewItemForm extends React.Component {
 					type={Person}
 					options={options}
 				/>
-				<Button title="Image" onPress={this.pickImage}/>
-				<Image source={this.state.avatarSource} style={{width:50,height:50}} />
+				<Button title="Image" onPress={this.pickImage} buttonStyle={styles.button}/>
+				<Image source={this.state.avatarSource} style={{width:250,height:250}} />
 
-				<TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
-					<Text style={styles.buttonText}>Save</Text>
-				</TouchableHighlight>
+				<Button title="Save" onPress={this.onPress} buttonStyle={styles.button} />
 			</View>
 		);
 	}
@@ -117,9 +118,9 @@ export default class NewItemForm extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		justifyContent: 'center',
-		marginTop: 50,
-		padding: 20,
+		padding: 40,
 		backgroundColor: '#ffffff',
 	},
 	title: {
@@ -137,7 +138,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#48BBEC',
 		borderColor: '#48BBEC',
 		borderWidth: 1,
-		borderRadius: 8,
 		marginBottom: 10,
 		alignSelf: 'stretch',
 		justifyContent: 'center'
