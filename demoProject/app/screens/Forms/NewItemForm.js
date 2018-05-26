@@ -4,22 +4,15 @@
 'use strict';
 
 import React from 'react';
-import t from 'tcomb-form-native';
-import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image, Picker} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import customFormStyle from '../../config/formStyles'
 import newItemsFormHeaderOptions from "../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
-import {Button} from "react-native-elements";
+import {Button, FormInput, FormLabel, FormValidationMessage} from "react-native-elements";
+import fileManager from "../../lib/storage/fileManager";
+import itemRepository from "../../domain/repository/items";
 
-const Form = t.form.Form;
 
-// here we are: define your domain model
-const Person = t.struct({
-	name: t.String,              // a required string
-	surname: t.maybe(t.String),  // an optional string
-	age: t.Number,               // a required number
-	rememberMe: t.Boolean        // a boolean
-});
 
 const options = {
 	stylesheet: customFormStyle,
@@ -27,49 +20,78 @@ const options = {
 	fields: {
 		name: {
 			error: 'This field is required'
+		},
+		category: {
+			help: "category"
 		}
 	}
 };
 
-var imgoptions = {
+const imgoptions = {
 	title: 'Select Avatar',
-	customButtons: [
-		{name: 'fb', title: 'Choose Photo from Facebook'},
-	],
 	storageOptions: {
 		skipBackup: true,
 		path: 'images'
 	}
 };
 
+const emptyForm = {
+	name: "",
+	category: "",
+	image: {},
+	errors: {}
+};
+
+const categories = ["Select Category...","Lipsticks", "Rental Cars", "Computers", "Cakes", "Chairs", "Dresses", "Suits"];
+
 export default class NewItemForm extends React.Component {
 	static navigationOptions = newItemsFormHeaderOptions;
 
 	constructor(props) {
 		super(props);
-		this.getValues = this.getValues.bind(this)
 		this.state = {
-			avatarSource: {}
-		}
-	}
+			name: "",
+			category: "",
+			formData: emptyForm
+		};
 
-	getValues = () => {
-		return this.refs.form.getValue();
+		this.wipeMemoryData();
 	};
 
-	onPress = () => {
-		const value = this.getValues();
-		if (value) {
-			alert(JSON.stringify(value));
-			console.log(value); // value here is an instance of Person
-			this.clearForm();
+	wipeMemoryData = () => {
+		try {
+			itemRepository.wipeAllItems();
+		} catch (err) {
+			alert(err);
+		}
+	};
+
+	onPress = async () => {
+		const data = this.state.formData;
+		if (data) {
+			try {
+				const imageUri = await fileManager.writeToMemory(data.image);
+				if (imageUri) {
+					const itemDetails = {
+						name: data.name,
+						category: data.category,
+						image: imageUri
+					};
+					itemRepository.saveItem(itemDetails);
+					this.clearForm();
+				} else {
+					alert("Could not find imageName or imageDataString on image object");
+				}
+			} catch (err) {
+				alert("Err: "+err);
+			}
 		} else {
 			// validation failed
 		}
 	};
 
 	clearForm = () => {
-		this.setState({ value: null });
+		this.setState({ formData: emptyForm });
 	};
 
 	pickImage = () => {
@@ -82,33 +104,43 @@ export default class NewItemForm extends React.Component {
 			else if (response.error) {
 				console.log('ImagePicker Error: ', response.error);
 			}
-			else if (response.customButton) {
-				console.log('User tapped custom button: ', response.customButton);
-			}
 			else {
-				let source = { uri: response.uri };
 
 				// You can also display the image using data:
 				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-				this.setState({
-					avatarSource: source
-				});
+				this.setState((prevState) => ({...prevState, formData: { ...prevState.formData, image: response }}));
 			}
 		});
+	};
+
+	updateName = (name) => {
+		this.setState((prevState) => ({...prevState, formData: {...prevState.formData, name: name}}));
+	};
+
+	selectCategory = (itemValue, itemIndex) => {
+		this.setState((prevState) => ({...prevState, formData: {...prevState.formData,category:itemValue}}))
 	};
 
 	render = () => {
 		return (
 			<View style={styles.container}>
-				{/* display */}
-				<Form
-					ref="form"
-					type={Person}
-					options={options}
-				/>
-				<Button title="Image" onPress={this.pickImage} buttonStyle={styles.button}/>
-				<Image source={this.state.avatarSource} style={{width:250,height:250}} />
+
+				<FormLabel>Name</FormLabel>
+				<FormInput onChangeText={this.updateName}/>
+				{this.state.formData.errors.name && <FormValidationMessage>Error message</FormValidationMessage>}
+
+				<Picker
+					selectedValue={this.state.formData.category}
+					prompt="Item Category"
+					onValueChange={this.selectCategory}>
+					{categories && categories.length > 0 && categories.map((category, i) =>
+						<Picker.Item key={i} label={category} value={category}/>
+					)}
+				</Picker>
+
+				<Button title="Add Image" onPress={this.pickImage} buttonStyle={styles.button}/>
+				<Image source={this.state.formData.image} style={styles.previewImage} />
 
 				<Button title="Save" onPress={this.onPress} buttonStyle={styles.button} />
 			</View>
@@ -141,5 +173,13 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		alignSelf: 'stretch',
 		justifyContent: 'center'
+	},
+	previewImage: {
+		width:250,
+		height:250,
+		justifyContent: 'center',
+		alignSelf:'stretch',
+		marginTop: 5,
+		marginBottom: 5
 	}
 });

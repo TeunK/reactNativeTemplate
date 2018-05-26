@@ -24,12 +24,27 @@ async function loadImage(uri) {
 }
 
 async function writeToMemory(fileData) {
-	let fileName = getFileName(fileData.uri);
-	let base64Str = fileData.base64;
-	let targetImageLocation = Constants.PictureDir+'/'+fileName;
-	await RNFetchBlob.fs.writeFile(targetImageLocation, base64Str, 'base64');
+	let fileName = "";
+	if ('fileName' in fileData){
+		fileName = fileData.fileName;
+	} else if ('uri' in fileData){
+		fileName = getFileNameFromPath(fileData.uri);
+	}
+
+	let imageDataString = "";
+	if ('data' in fileData) {
+		imageDataString = fileData.data;
+	} else if ('base64' in fileData) {
+		imageDataString = fileData.base64;
+	}
+
+	if (fileName !== "" && imageDataString !== "") {
+		let targetImageLocation = Constants.PictureDir + '/' + fileName;
+		await RNFetchBlob.fs.writeFile(targetImageLocation, imageDataString, 'base64');
+		return targetImageLocation;
+	}
 }
 
-const getFileName = (uri) => {
+const getFileNameFromPath = (uri) => {
 	return uri.substring(uri.lastIndexOf('/')+1);
 };

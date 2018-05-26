@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import TitleCardComponent from "../components/TitleCardComponent";
 import {RegisteredItemsScrollerComponent} from "../components/RegisteredItemsComponent";
-import {itemsList} from "../domain/repository/items";
+import itemRepository from "../domain/repository/items";
 import ListView from "realm/react-native/listview";
 import imageFiles from "../domain/repository/imageFiles";
 import {Text} from "react-native-elements";
@@ -19,7 +19,8 @@ class HomeScreen extends React.Component {
 		super();
 		this.state = {
 			selectedIndex: 2,
-			imageFiles: []
+			imageFiles: [],
+			items: []
 		};
 		this.updateIndex = this.updateIndex.bind(this);
 	}
@@ -38,13 +39,24 @@ class HomeScreen extends React.Component {
 
 	async componentDidMount() {
 		await this.loadImages();
+		await this.loadItems();
 	}
+
+	loadItems = async () => {
+		try {
+			const items = await itemRepository.getAllItems();
+			this.setState({items: items});
+		} catch (err) {
+			alert(err);
+		}
+	};
 
 
 	componentWillReceiveProps(nextProps) {
 		if (!this.props.isFocused && nextProps.isFocused) {
 			try {
-				const result = this.loadImages();
+				const imagesFromDisk = this.loadImages();
+				const itemsFromMemory = this.loadItems();
 			} catch (err) {
 				alert("ERR: "+err);
 			}
@@ -89,9 +101,9 @@ class HomeScreen extends React.Component {
 				{/*)}*/}
 
 
-				{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images} clickFunction={this.openNewItemForm}/>}
-				<ItemScrollerComponent itemsList={itemsList}/>
-				{/*<RegisteredItemsScrollerComponent itemsList={itemsList}/>*/}
+				{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickFunction={this.openNewItemForm}/>}
+				<ItemScrollerComponent itemsList={itemRepository.getDummyItems()}/>
+				{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images}/>}
 				{/*<RegisteredItemsScrollerComponent itemsList={itemsList} clickFunction={() => {alert("hi")}}/>*/}
 				{/*<RegisteredItemsScrollerComponent itemsList={itemsList}/>*/}
 				{/*<RegisteredItemsScrollerComponent itemsList={itemsList}/>*/}

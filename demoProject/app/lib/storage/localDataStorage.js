@@ -5,6 +5,7 @@ import Realm from 'realm';
 
 export default LocalDataStorage = {
 	save: (schema, instance) => {
+		console.log("SAVING INTO ["+JSON.stringify(schema)+"] VALUES: "+JSON.stringify(instance, null, 2));
 		Realm.open({schema: [schema]})
 			.then(realm => {
 				realm.write(() => {
@@ -13,6 +14,7 @@ export default LocalDataStorage = {
 			})
 	},
 	get: (schema) => {
+		console.log("GET * FROM ["+JSON.stringify(schema)+"]");
 		return Realm.open({schema: [schema]})
 			.then(realm => {
 				return realm.objects(schema.name);

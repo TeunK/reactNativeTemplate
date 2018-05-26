@@ -4,19 +4,32 @@ import Constants from "../../config/constants";
 
 export default imageFiles = {
 	getImages: getImages,
-	getImageFilePath: getImageFilePath
+	getImageFilePath: getImageFilePath,
+	pathToFile: pathToFile
 }
 
 async function getImages() {
-	return RNFetchBlob.fs.exists(Constants.PictureDir)
-		.then(async () => {
-			return await RNFetchBlob.fs.ls(Constants.PictureDir);
-		})
-		.catch(() => {
+	try {
+		const pictureDirExists = await RNFetchBlob.fs.exists(Constants.PictureDir)
+		if (pictureDirExists) {
+			const imageList = await RNFetchBlob.fs.ls(Constants.PictureDir);
+			return imageList;
+		} else
 			return [];
-		});
+	} catch (err) {
+		return [];
+	}
+}
+
+function pathToFile(filePath) {
+	if (filePath.substring(0,7) === "file://") {
+		return filePath
+	} else {
+		return "file://" + filePath
+	}
 }
 
 function getImageFilePath(imageName) {
 	return "file://" + Constants.PictureDir + "/" + imageName;
+
 }

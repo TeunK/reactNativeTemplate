@@ -21,7 +21,7 @@ export class RegisteredItemsScrollerComponent extends React.Component {
 				onPress={() => {alert(item.image)}}
 				style={{display: "flex", flexDirection: 'column', height:100, width:100, margin:5, marginBottom:15}}>
 
-				<Image source={{uri: item.image}} style={{flex:4}}/>
+				<Image source={{uri: imageFiles.pathToFile(item.image)}} style={{flex:4}}/>
 				<Text style={{fontSize:8, flex:1}}>{item.name}</Text>
 			</TouchableOpacity>
 		);

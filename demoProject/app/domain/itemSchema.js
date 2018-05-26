@@ -8,7 +8,7 @@ export const ItemSchema = {
 	name: Constants.localDataStorageTypes.item,
 	properties: {
 		name: 'string',
-		dateAdded: 'date',
-		pictures: 'string[]',
+		category: 'string',
+		image: 'string',
 	}
 };
