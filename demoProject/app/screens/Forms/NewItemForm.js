@@ -50,20 +50,9 @@ export default class NewItemForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: "",
-			category: "",
 			formData: emptyForm
 		};
-
-		this.wipeMemoryData();
-	};
-
-	wipeMemoryData = () => {
-		try {
-			itemRepository.wipeAllItems();
-		} catch (err) {
-			alert(err);
-		}
+		this.nameInputRef = React.createRef();
 	};
 
 	onPress = async () => {
@@ -91,6 +80,7 @@ export default class NewItemForm extends React.Component {
 	};
 
 	clearForm = () => {
+		this.nameInputRef.clearText();
 		this.setState({ formData: emptyForm });
 	};
 
@@ -127,7 +117,7 @@ export default class NewItemForm extends React.Component {
 			<View style={styles.container}>
 
 				<FormLabel>Name</FormLabel>
-				<FormInput onChangeText={this.updateName}/>
+				<FormInput onChangeText={this.updateName} ref={element => this.nameInputRef = element}/>
 				{this.state.formData.errors.name && <FormValidationMessage>Error message</FormValidationMessage>}
 
 				<Picker
