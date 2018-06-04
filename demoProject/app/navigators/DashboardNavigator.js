@@ -7,12 +7,14 @@ import {StackNavigator} from 'react-navigation';
 import NewItemGroupForm from "../screens/Forms/NewItemGroupForm";
 import ItemsListScreen from "../screens/ItemsListScreen";
 import DashboardScreen from "../screens/DashboardScreen";
+import EditItemForm from "../screens/Forms/EditItemForm";
 
 export default DashboardNavigator = StackNavigator({
 		DashboardScreen: {screen: DashboardScreen },
 		NewItemForm: {screen: NewItemForm},
 		NewGroupForm: {screen: NewItemGroupForm},
 		ItemsListScreen: {screen: ItemsListScreen},
+		EditItemForm: {screen: EditItemForm}
 	}, {
 		initialRouteName: 'DashboardScreen',
 		transitionConfig: () => ({

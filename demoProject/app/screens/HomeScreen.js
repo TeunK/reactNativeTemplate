@@ -33,6 +33,10 @@ class HomeScreen extends React.Component {
 		this.props.navigation.navigate('NewItemForm');
 	};
 
+	selectItem = (item) => {
+		this.props.navigation.navigate('EditItemForm', {item: item});
+	};
+
 	openProfileScreen = () => {
 		this.props.navigation.navigate('ProfileScreen')
 	};
@@ -101,7 +105,7 @@ class HomeScreen extends React.Component {
 				{/*)}*/}
 
 
-				{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickFunction={this.openNewItemForm}/>}
+				{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>}
 				<ItemScrollerComponent itemsList={itemRepository.getDummyItems()}/>
 				{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images}/>}
 				{/*<RegisteredItemsScrollerComponent itemsList={itemsList} clickFunction={() => {alert("hi")}}/>*/}
