@@ -32,7 +32,8 @@ local.properties
 
 # node.js
 #
-node_modules/
+!node_modules/
+node_modules/*
 npm-debug.log
 yarn-error.log
 
@@ -54,3 +55,27 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# Manual Intervention to retain RNFetchBlobFS.java modification to fix null array issue
+!node_modules/react-native-fetch-blob/
+node_modules/react-native-fetch-blob/*
+
+!node_modules/react-native-fetch-blob/android/
+node_modules/react-native-fetch-blob/android/*
+
+!node_modules/react-native-fetch-blob/android/src/
+node_modules/react-native-fetch-blob/android/src/*
+
+!node_modules/react-native-fetch-blob/android/src/main/
+node_modules/react-native-fetch-blob/android/src/main/*
+
+!node_modules/react-native-fetch-blob/android/src/main/java/
+node_modules/react-native-fetch-blob/android/src/main/java/*
+
+!node_modules/react-native-fetch-blob/android/src/main/java/com/
+node_modules/react-native-fetch-blob/android/src/main/java/com/*
+
+!node_modules/react-native-fetch-blob/android/src/main/java/com/RNFetchBlob/
+node_modules/react-native-fetch-blob/android/src/main/java/com/RNFetchBlob/*
+
+!node_modules/react-native-fetch-blob/android/src/main/java/com/RNFetchBlob/RNFetchBlobFS.java
