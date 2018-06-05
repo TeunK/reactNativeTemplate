@@ -110,23 +110,20 @@ class HomeScreen extends React.Component {
 					content="This is where you can find the items you have recorded"
 				/>
 
-				{/*{this.state.images && <Text>{JSON.stringify(this.state.images, null, 2)}</Text>}*/}
-				{/*{this.state.images && this.state.images.map((image, i) =>*/}
-					{/*<View key={i}>*/}
-						{/*<Text>{imageFiles.getImageFilePath(image)}</Text>*/}
-						{/*<Image source={{uri: imageFiles.getImageFilePath(image)}} style={{height:200, width:200}}/>*/}
-					{/*</View>*/}
-				{/*)}*/}
-
-
 				{this.state.categorisedItems && Object.keys(this.state.categorisedItems).map((category, i) =>
 						<RegisteredItemsScrollerComponent key={i} category={category} itemsList={this.state.categorisedItems[category]} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm.bind(null, category)}/>
 					)
 				}
 
-				{/*{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>}*/}
-				{/*<ItemScrollerComponent itemsList={itemRepository.getDummyItems()}/>*/}
-				{/*{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images}/>}*/}
+				{this.state.items && <View>
+						<RegisteredItemsScrollerComponent category={"All recorded items"} itemsList={this.state.items} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>
+					</View>
+				}
+
+				{this.state.images && <View>
+						<RegisteredItemsScrollerComponent category={"All images, like.. evah"} itemsList={this.state.images}/>
+					</View>
+				}
 			</ScrollView>
 		);
 	}
