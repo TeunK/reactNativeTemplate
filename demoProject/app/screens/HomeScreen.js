@@ -20,7 +20,8 @@ class HomeScreen extends React.Component {
 		this.state = {
 			selectedIndex: 2,
 			imageFiles: [],
-			items: []
+			items: [],
+			categorisedItems: {}
 		};
 		this.updateIndex = this.updateIndex.bind(this);
 	}
@@ -50,11 +51,24 @@ class HomeScreen extends React.Component {
 		try {
 			const items = await itemRepository.getAllItems();
 			this.setState({items: items});
+			this.setState({categorisedItems: this.getCategorisedItems(items)});
 		} catch (err) {
 			alert(err);
 		}
 	};
 
+	getCategorisedItems = (items) => {
+		let categorisedItems = {};
+		for (let itemId in Object.keys(items)) {
+			const item = items[itemId];
+			if (categorisedItems.hasOwnProperty(item.category)) {
+				categorisedItems[item.category].push(item);
+			} else {
+				categorisedItems[item.category] = [item];
+			}
+		}
+		return categorisedItems;
+	};
 
 	componentWillReceiveProps(nextProps) {
 		if (!this.props.isFocused && nextProps.isFocused) {
@@ -104,6 +118,11 @@ class HomeScreen extends React.Component {
 					{/*</View>*/}
 				{/*)}*/}
 
+
+				{this.state.categorisedItems && Object.keys(this.state.categorisedItems).map((category, i) =>
+						<RegisteredItemsScrollerComponent key={i} header={category} itemsList={this.state.categorisedItems[category]} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>
+					)
+				}
 
 				{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>}
 				<ItemScrollerComponent itemsList={itemRepository.getDummyItems()}/>
