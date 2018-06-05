@@ -4,6 +4,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Slider } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import fileManager from "../lib/storage/fileManager";
 
 const landmarkSize = 2;
 
@@ -37,6 +38,7 @@ export default class CameraComponent extends React.Component {
 		showGallery: false,
 		photos: [],
 		faces: [],
+		indicateTakingPicture: false
 	};
 
 	getRatios = async function() {
@@ -100,9 +102,18 @@ export default class CameraComponent extends React.Component {
 
 	takePicture = async function() {
 		if (this.camera) {
-			this.camera.takePictureAsync().then(data => {
-				console.log('data: ', data);
-			});
+			this.setState({indicateTakingPicture: true});
+
+			const options = { quality: 0.5, base64: true };
+			let data;
+			try {
+				data = await this.camera.takePictureAsync(options);
+				await fileManager.writeToMemory(data);
+			} catch(err) {
+				alert(err);
+			} finally {
+				this.setState({indicateTakingPicture: false});
+			}
 		}
 	};
 
@@ -281,7 +292,22 @@ export default class CameraComponent extends React.Component {
 	}
 
 	render() {
-		return <View style={styles.container}>{this.renderCamera()}</View>;
+		return <View style={styles.container}>
+			{this.renderCamera()}
+			{
+				// White opacity screen overlay when picture being taken
+				this.state.indicateTakingPicture &&
+				<View style={{
+					position: "absolute",
+					flex: 1,
+					top: 0,
+					left: 0,
+					right:0,
+					bottom:0,
+					backgroundColor: 'rgba(255, 255, 255, 0.05)'
+				}}/>
+			}
+		</View>;
 	}
 }
 

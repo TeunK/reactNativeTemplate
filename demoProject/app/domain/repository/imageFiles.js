@@ -10,7 +10,7 @@ export default imageFiles = {
 
 async function getImages() {
 	try {
-		const pictureDirExists = await RNFetchBlob.fs.exists(Constants.PictureDir)
+		const pictureDirExists = await RNFetchBlob.fs.exists(Constants.PictureDir);
 		if (pictureDirExists) {
 			const imageList = await RNFetchBlob.fs.ls(Constants.PictureDir);
 			return imageList;

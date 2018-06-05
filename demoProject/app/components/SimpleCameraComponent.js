@@ -40,8 +40,18 @@ export default class SimpleCameraComponent extends Component {
 	takePicture = async function() {
 		if (this.camera) {
 			const options = { quality: 0.5, base64: true };
-			const data = await this.camera.takePictureAsync(options);
-			await fileManager.writeToMemory(data);
+			let data;
+			try {
+				data = await this.camera.takePictureAsync(options);
+			} catch(err) {
+				alert("CAM: "+err);
+			}
+
+			try {
+				await fileManager.writeToMemory(data);
+			} catch(err) {
+				alert("STORAGE: "+err);
+			}
 		}
 	};
 }
