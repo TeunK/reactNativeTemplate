@@ -18,7 +18,7 @@ export class RegisteredItemsScrollerComponent extends React.Component {
 		const registeredItemsDisplay = this.props.itemsList.map((item, i) =>
 			<TouchableOpacity
 				key={i}
-				onPress={() => {this.props.clickItemFunction(item)}}
+				onPress={() => {this.props.clickItemFunction ? this.props.clickItemFunction(item) : () => {}}}
 				style={{display: "flex", flexDirection: 'column', height:100, width:100, margin:5, marginBottom:15}}>
 
 				<Image source={{uri: imageFiles.pathToFile(item.image)}} style={{flex:4}}/>
