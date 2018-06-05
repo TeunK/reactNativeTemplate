@@ -11,6 +11,7 @@ import newItemsFormHeaderOptions from "../../config/navigationOptionHeaders/newI
 import {Button, FormInput, FormLabel, FormValidationMessage} from "react-native-elements";
 import fileManager from "../../lib/storage/fileManager";
 import itemRepository from "../../domain/repository/items";
+import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
 
 
 
@@ -44,16 +45,38 @@ const emptyForm = {
 
 const categories = ["Select Category...","Lipsticks", "Rental Cars", "Computers", "Cakes", "Chairs", "Dresses", "Suits"];
 
-export default class NewItemForm extends React.Component {
+class NewItemForm extends React.Component {
 	static navigationOptions = newItemsFormHeaderOptions;
 
 	constructor(props) {
 		super(props);
+
+		let startState = emptyForm;
+
+		if (this.props.navigation.state.params) {
+			const options = this.props.navigation.state.params.options;
+			if (options.hasOwnProperty("category"))
+				startState.category = options.category;
+		}
+
 		this.state = {
-			formData: emptyForm
+			formData: startState,
 		};
 		this.nameInputRef = React.createRef();
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.navigation.state.params) {
+			if (!this.props.isFocused && nextProps.isFocused) {
+				const options = this.props.navigation.state.params.options;
+				if (options.hasOwnProperty("category"))
+					this.setState((prevState) => ({...prevState, formData: { ...prevState.formData, category : options.category}}));
+			}
+			if (this.props.isFocused && !nextProps.isFocused) {
+				this.clearForm();
+			}
+		}
+	}
 
 	onPress = async () => {
 		const data = this.state.formData;
@@ -137,6 +160,9 @@ export default class NewItemForm extends React.Component {
 		);
 	}
 }
+
+
+export default withNavigationFocus(NewItemForm);
 
 const styles = StyleSheet.create({
 	container: {

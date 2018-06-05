@@ -30,8 +30,8 @@ class HomeScreen extends React.Component {
 		this.setState({selectedIndex})
 	}
 
-	openNewItemForm = () => {
-		this.props.navigation.navigate('NewItemForm');
+	openNewItemForm = (category) => {
+		this.props.navigation.navigate('NewItemForm', {options: {category: category}});
 	};
 
 	selectItem = (item) => {
@@ -120,16 +120,13 @@ class HomeScreen extends React.Component {
 
 
 				{this.state.categorisedItems && Object.keys(this.state.categorisedItems).map((category, i) =>
-						<RegisteredItemsScrollerComponent key={i} header={category} itemsList={this.state.categorisedItems[category]} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>
+						<RegisteredItemsScrollerComponent key={i} category={category} itemsList={this.state.categorisedItems[category]} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm.bind(null, category)}/>
 					)
 				}
 
-				{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>}
-				<ItemScrollerComponent itemsList={itemRepository.getDummyItems()}/>
-				{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images}/>}
-				{/*<RegisteredItemsScrollerComponent itemsList={itemsList} clickFunction={() => {alert("hi")}}/>*/}
-				{/*<RegisteredItemsScrollerComponent itemsList={itemsList}/>*/}
-				{/*<RegisteredItemsScrollerComponent itemsList={itemsList}/>*/}
+				{/*{this.state.items && <RegisteredItemsScrollerComponent itemsList={this.state.items} clickItemFunction={this.selectItem} clickPanelFunction={this.openNewItemForm}/>}*/}
+				{/*<ItemScrollerComponent itemsList={itemRepository.getDummyItems()}/>*/}
+				{/*{this.state.images && <RegisteredItemsScrollerComponent itemsList={this.state.images}/>}*/}
 			</ScrollView>
 		);
 	}

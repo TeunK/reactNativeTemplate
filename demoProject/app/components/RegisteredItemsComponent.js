@@ -30,10 +30,10 @@ export class RegisteredItemsScrollerComponent extends React.Component {
 
 		return (
 			<CardComponent
-				header={this.props.header ? this.props.header : "("+this.props.itemsList.length+") Registered Items"}
+				header={this.props.category ? this.props.category : "("+this.props.itemsList.length+") Registered Items"}
+				category={this.props.category}
 				content={componentsScrollView}
 				iconCallback={this.props.clickPanelFunction}
-				clickItemFunction={this.props.clickItemFunction}
 			/>
 		)
 	}

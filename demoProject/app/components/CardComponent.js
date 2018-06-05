@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native'
 import {Card, Icon} from 'react-native-elements'
 import TouchableItem from "react-navigation/src/views/TouchableItem";
 
-export default CardComponent = ({header, content, iconCallback}) => (
+export default CardComponent = ({header, category, content, iconCallback}) => (
 	<View>
 		<Card>
 			<View style={{display: "flex", flexDirection: 'row', height:40}}>
