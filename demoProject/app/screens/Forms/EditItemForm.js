@@ -6,13 +6,26 @@ import {Button, Image, Text, View, StyleSheet} from "react-native";
 import editItemFormHeaderOptions from "../../config/navigationOptionHeaders/editItemFormHeaderOptions";
 import {Card} from "react-native-elements";
 import imageFiles from "../../domain/repository/imageFiles";
+import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
 
-export default class NewItemGroupForm extends React.Component {
+class NewItemGroupForm extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			selectedItem: this.props.navigation.state.params.item
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.navigation.state.params) {
+			if (!this.props.isFocused && nextProps.isFocused) {
+				this.setState({
+					selectedItem: this.props.navigation.state.params.item
+				});
+			}
+			if (this.props.isFocused && !nextProps.isFocused) {
+			}
 		}
 	}
 
@@ -37,6 +50,8 @@ export default class NewItemGroupForm extends React.Component {
 		)
 	}
 }
+
+export default withNavigationFocus(NewItemGroupForm);
 
 const styles = StyleSheet.create({
 	button: {
