@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Button, Text, View} from "react-native";
-import newItemGroupFormHeaderOptions from "../../config/navigationOptionHeaders/newItemGroupFormHeaderOptions";
+import newItemGroupFormHeaderOptions from "../../../config/navigationOptionHeaders/newItemGroupFormHeaderOptions";
 
 export default class NewItemGroupForm extends React.Component {
 	static navigationOptions = newItemGroupFormHeaderOptions;

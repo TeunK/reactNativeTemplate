@@ -6,14 +6,13 @@
 import React from 'react';
 import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image, Picker} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import customFormStyle from '../../config/formStyles'
-import newItemsFormHeaderOptions from "../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
+import customFormStyle from '../../../config/formStyles'
+import newItemsFormHeaderOptions from "../../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
 import {Button, FormInput, FormLabel, FormValidationMessage} from "react-native-elements";
-import fileManager from "../../lib/storage/fileManager";
-import itemRepository from "../../domain/repository/items";
+import fileManager from "../../../lib/storage/fileManager";
+import itemRepository from "../../../domain/repository/items";
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
-
-
+import styles from "./styles";
 
 const options = {
 	stylesheet: customFormStyle,
@@ -161,41 +160,4 @@ class NewItemForm extends React.Component {
 	}
 }
 
-
 export default withNavigationFocus(NewItemForm);
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		padding: 40,
-		backgroundColor: '#ffffff',
-	},
-	title: {
-		fontSize: 30,
-		alignSelf: 'center',
-		marginBottom: 30
-	},
-	buttonText: {
-		fontSize: 18,
-		color: 'white',
-		alignSelf: 'center'
-	},
-	button: {
-		height: 36,
-		backgroundColor: '#48BBEC',
-		borderColor: '#48BBEC',
-		borderWidth: 1,
-		marginBottom: 10,
-		alignSelf: 'stretch',
-		justifyContent: 'center'
-	},
-	previewImage: {
-		width:250,
-		height:250,
-		justifyContent: 'center',
-		alignSelf:'stretch',
-		marginTop: 5,
-		marginBottom: 5
-	}
-});

@@ -3,17 +3,10 @@
  */
 import React from 'react';
 import { Text, View} from "react-native";
+import newItemsFormHeaderOptions from "../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
 
 export default class ItemsListScreen extends React.Component {
-	static navigationOptions = {
-		title: 'Items List',
-		headerStyle: {
-			backgroundColor: '#212121'
-		},
-		headerTitleStyle: {
-			color: '#FFF'
-		}
-	};
+	static navigationOptions = newItemsFormHeaderOptions;
 	render() {
 		return (
 			<View>

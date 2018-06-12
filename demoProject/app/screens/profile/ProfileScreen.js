@@ -2,10 +2,11 @@
  * Created by Teun on 16-5-2018.
  */
 import React from 'react';
-import {Text, View, StyleSheet} from "react-native";
-import SimpleCameraComponent from "../components/SimpleCameraComponent";
-import CameraComponent from "../components/CameraComponent";
+import {Text, View} from "react-native";
+import SimpleCameraComponent from "../../components/simpleCamera/SimpleCameraComponent";
+import CameraComponent from "../../components/camera/CameraComponent";
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
+import styles from './styles';
 
 class ProfileScreen extends React.Component {
 	constructor(props) {
@@ -49,14 +50,5 @@ class ProfileScreen extends React.Component {
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'stretch',
-		backgroundColor: '#F5FCFF',
-	}
-});
 
 export default withNavigationFocus(ProfileScreen);

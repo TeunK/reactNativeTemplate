@@ -1,18 +1,14 @@
 import React from 'react';
 
-import {
-	Image,
-	Platform, ScrollView,
-	StyleSheet, View,
-} from 'react-native';
-import TitleCardComponent from "../components/TitleCardComponent";
-import {RegisteredItemsScrollerComponent} from "../components/RegisteredItemsComponent";
-import itemRepository from "../domain/repository/items";
+import {ScrollView, View} from 'react-native';
+import TitleCardComponent from "../../components/titleCard/TitleCardComponent";
+import {RegisteredItemsScrollerComponent} from "../../components/registeredItems/RegisteredItemsComponent";
+import itemRepository from "../../domain/repository/items";
 import ListView from "realm/react-native/listview";
-import imageFiles from "../domain/repository/imageFiles";
+import imageFiles from "../../domain/repository/imageFiles";
 import {Text} from "react-native-elements";
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
-import {ItemScrollerComponent} from "../components/ItemScrollerComponent";
+import {ItemScrollerComponent} from "../../components/itemScroller/ItemScrollerComponent";
 
 class HomeScreen extends React.Component {
 	constructor () {
@@ -105,7 +101,7 @@ class HomeScreen extends React.Component {
 			<ScrollView>
 
 				<TitleCardComponent
-					img={require('../files/images/deedee.jpg')}
+					img={require('../../files/images/deedee.jpg')}
 					header="Home"
 					content="This is where you can find the items you have recorded"
 				/>

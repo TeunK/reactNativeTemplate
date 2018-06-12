@@ -9,7 +9,9 @@ import {
 	View
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import fileManager from '../lib/storage/fileManager';
+import fileManager from '../../lib/storage/fileManager';
+import globalStyles from "../../config/globalStyles";
+import styles from "./styles";
 
 export default class SimpleCameraComponent extends Component {
 	render() {
@@ -30,7 +32,7 @@ export default class SimpleCameraComponent extends Component {
 						onPress={this.takePicture.bind(this)}
 						style = {styles.capture}
 					>
-						<Text style={{fontSize: 14}}> SNAP </Text>
+						<Text style={globalStyles.fs14}> SNAP </Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -55,25 +57,3 @@ export default class SimpleCameraComponent extends Component {
 		}
 	};
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		flexDirection: 'column',
-		backgroundColor: 'black'
-	},
-	preview: {
-		flex: 1,
-		justifyContent: 'flex-end',
-		alignItems: 'center'
-	},
-	capture: {
-		flex: 0,
-		backgroundColor: '#fff',
-		borderRadius: 5,
-		padding: 15,
-		paddingHorizontal: 20,
-		alignSelf: 'center',
-		margin: 20
-	}
-});

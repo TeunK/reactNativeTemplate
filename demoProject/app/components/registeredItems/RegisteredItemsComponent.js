@@ -7,10 +7,11 @@ import {
 	ScrollView, Text, TouchableOpacity,
 	View
 } from 'react-native';
-import CardComponent from "./CardComponent";
+import CardComponent from "../card/CardComponent";
 import {Tile} from "react-native-elements";
-import fileManager from "../lib/storage/fileManager";
-import imageFiles from "../domain/repository/imageFiles";
+import fileManager from "../../lib/storage/fileManager";
+import imageFiles from "../../domain/repository/imageFiles";
+import globalStyles from "../../config/globalStyles";
 
 export class RegisteredItemsScrollerComponent extends React.Component {
 
@@ -19,7 +20,7 @@ export class RegisteredItemsScrollerComponent extends React.Component {
 			<TouchableOpacity
 				key={i}
 				onPress={() => {this.props.clickItemFunction ? this.props.clickItemFunction(item) : () => {}}}
-				style={{display: "flex", flexDirection: 'column', height:100, width:100, margin:5, marginBottom:15}}>
+				style={[globalStyles.flex, globalStyles.flexDirectionColumn, globalStyles.h100, globalStyles.w100, globalStyles.mxs, globalStyles.mbl]}>
 
 				<Image source={{uri: imageFiles.pathToFile(item.image)}} style={{flex:4}}/>
 				<Text style={{fontSize:8, flex:1}}>{item.name}</Text>

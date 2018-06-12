@@ -2,12 +2,12 @@
  * Created by Teun on 16-5-2018.
  */
 import React from 'react';
-import NewItemForm from "../screens/Forms/NewItemForm";
+import NewItemForm from "../screens/Forms/newItem/NewItemForm";
 import {StackNavigator} from 'react-navigation';
-import NewItemGroupForm from "../screens/Forms/NewItemGroupForm";
-import ItemsListScreen from "../screens/ItemsListScreen";
-import DashboardScreen from "../screens/DashboardScreen";
-import EditItemForm from "../screens/Forms/EditItemForm";
+import NewItemGroupForm from "../screens/Forms/newItemGroup/NewItemGroupForm";
+import ItemsListScreen from "../screens/itemsList/ItemsListScreen";
+import DashboardScreen from "../screens/dashboard/DashboardScreen";
+import EditItemForm from "../screens/Forms/editItem/EditItemForm";
 
 export default DashboardNavigator = StackNavigator({
 		DashboardScreen: {screen: DashboardScreen },

@@ -2,10 +2,10 @@
  * Created by Teun on 22-5-2018.
  */
 
-import HomeScreen from "../../app/screens/HomeScreen";
+import HomeScreen from "../screens/home/HomeScreen";
 import DashboardNavigator from "../navigators/DashboardNavigator";
-import ProfileScreen from "../../app/screens/ProfileScreen";
-import SigninScreen from "../../app/screens/SignInScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
+import SigninScreen from "../screens/signin/SignInScreen";
 import {createBottomTabNavigator} from 'react-navigation';
 import NavigationBarOptions from "../../app/lib/NavigationBarOptions";
 

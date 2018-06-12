@@ -4,7 +4,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Slider } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import fileManager from "../lib/storage/fileManager";
+import fileManager from "../../lib/storage/fileManager";
 
 const landmarkSize = 2;
 

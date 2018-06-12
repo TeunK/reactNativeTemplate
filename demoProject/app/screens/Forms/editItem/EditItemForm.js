@@ -3,10 +3,12 @@
  */
 import React from 'react';
 import {Button, Image, Text, View, StyleSheet} from "react-native";
-import editItemFormHeaderOptions from "../../config/navigationOptionHeaders/editItemFormHeaderOptions";
+import editItemFormHeaderOptions from "../../../config/navigationOptionHeaders/editItemFormHeaderOptions";
 import {Card} from "react-native-elements";
-import imageFiles from "../../domain/repository/imageFiles";
+import imageFiles from "../../../domain/repository/imageFiles";
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
+import styles from "./styles";
+import globalStyles from "../../../config/globalStyles";
 
 class NewItemGroupForm extends React.Component {
 
@@ -34,12 +36,10 @@ class NewItemGroupForm extends React.Component {
 	render() {
 		return (
 			<View>
-				<View style={{display:"flex"}}>
-					<Card
-						image={{uri: imageFiles.pathToFile(this.state.selectedItem.image)}}
-						>
+				<View style={globalStyles.flex}>
+					<Card image={{uri: imageFiles.pathToFile(this.state.selectedItem.image)}} >
 						<Text>{this.state.selectedItem.name}</Text>
-						<Text style={{marginBottom: 10}}>
+						<Text style={globalStyles.mbm}>
 							{this.state.selectedItem.category}
 						</Text>
 
@@ -52,16 +52,3 @@ class NewItemGroupForm extends React.Component {
 }
 
 export default withNavigationFocus(NewItemGroupForm);
-
-const styles = StyleSheet.create({
-	button: {
-		height: 36,
-		backgroundColor: '#48BBEC',
-		borderColor: '#48BBEC',
-		borderWidth: 1,
-		marginTop:20,
-		marginBottom: 10,
-		alignSelf: 'stretch',
-		justifyContent: 'center'
-	}
-});
