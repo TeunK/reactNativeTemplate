@@ -11,6 +11,7 @@ import newItemsFormHeaderOptions from "../../../config/navigationOptionHeaders/n
 import {Button, FormInput, FormLabel, FormValidationMessage} from "react-native-elements";
 import fileManager from "../../../lib/storage/fileManager";
 import itemRepository from "../../../domain/repository/items";
+import ItemsService from '../../../services/itemsService';
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
 import styles from "./styles";
 
@@ -60,8 +61,19 @@ class NewItemForm extends React.Component {
 
 		this.state = {
 			formData: startState,
+			existingItemCategories: []
 		};
+
 		this.nameInputRef = React.createRef();
+	};
+
+	componentDidMount() {
+		this.getCategories();
+	}
+
+	getCategories = async () => {
+		const existingItemCategories = await ItemsService.getExistingCategories();
+		this.setState((prevState) => ({...prevState, existingItemCategories: existingItemCategories}));
 	};
 
 	componentWillReceiveProps(nextProps) {
@@ -103,7 +115,7 @@ class NewItemForm extends React.Component {
 
 	clearForm = () => {
 		this.nameInputRef.clearText();
-		this.setState({ formData: emptyForm });
+		this.setState(prevState => ({...prevState, formData: emptyForm }));
 	};
 
 	pickImage = () => {
@@ -146,9 +158,7 @@ class NewItemForm extends React.Component {
 					selectedValue={this.state.formData.category}
 					prompt="Item Category"
 					onValueChange={this.selectCategory}>
-					{categories && categories.length > 0 && categories.map((category, i) =>
-						<Picker.Item key={i} label={category} value={category}/>
-					)}
+					{this.state.existingItemCategories.map((categoryName, i) => <Picker.Item key={i} label={categoryName} value={categoryName}/>)}
 				</Picker>
 
 				<Button title="Add Image" onPress={this.pickImage} buttonStyle={styles.button}/>
