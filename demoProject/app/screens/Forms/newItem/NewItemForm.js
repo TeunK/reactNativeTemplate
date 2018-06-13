@@ -61,14 +61,17 @@ class NewItemForm extends React.Component {
 
 		this.state = {
 			formData: startState,
-			existingItemCategories: []
+			existingItemCategories: [],
+			categoryOptions: []
 		};
 
 		this.nameInputRef = React.createRef();
+		this.categoryInputRef = React.createRef();
 	};
 
 	componentDidMount() {
-		this.getCategories();
+		this.getCategories()
+			.then(() => {this.updateCategory("")});
 	}
 
 	getCategories = async () => {
@@ -115,6 +118,7 @@ class NewItemForm extends React.Component {
 
 	clearForm = () => {
 		this.nameInputRef.clearText();
+		this.categoryInputRef.clearText();
 		this.setState(prevState => ({...prevState, formData: emptyForm }));
 	};
 
@@ -142,6 +146,17 @@ class NewItemForm extends React.Component {
 		this.setState((prevState) => ({...prevState, formData: {...prevState.formData, name: name}}));
 	};
 
+	updateCategory = (categoryQuery) => {
+		let categoryOptions = [];
+		this.state.existingItemCategories.forEach(category => {
+			if (category.toLowerCase().startsWith(categoryQuery.toLowerCase())) {
+				categoryOptions.push(category.toLowerCase());
+			}
+		});
+
+		this.setState(prevState => ({...prevState, categoryOptions: categoryOptions}));
+	};
+
 	selectCategory = (itemValue, itemIndex) => {
 		this.setState((prevState) => ({...prevState, formData: {...prevState.formData,category:itemValue}}))
 	};
@@ -154,11 +169,12 @@ class NewItemForm extends React.Component {
 				<FormInput onChangeText={this.updateName} ref={element => this.nameInputRef = element}/>
 				{this.state.formData.errors.name && <FormValidationMessage>Error message</FormValidationMessage>}
 
+				<FormInput onChangeText={this.updateCategory} ref={element => this.categoryInputRef = element}/>
 				<Picker
 					selectedValue={this.state.formData.category}
 					prompt="Item Category"
 					onValueChange={this.selectCategory}>
-					{this.state.existingItemCategories.map((categoryName, i) => <Picker.Item key={i} label={categoryName} value={categoryName}/>)}
+					{this.state.categoryOptions.map((categoryName, i) => <Picker.Item key={i} label={categoryName} value={categoryName}/>)}
 				</Picker>
 
 				<Button title="Add Image" onPress={this.pickImage} buttonStyle={styles.button}/>
