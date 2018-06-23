@@ -8,13 +8,15 @@ import NewItemGroupForm from "../screens/Forms/newItemGroup/NewItemGroupForm";
 import ItemsListScreen from "../screens/itemsList/ItemsListScreen";
 import DashboardScreen from "../screens/dashboard/DashboardScreen";
 import EditItemForm from "../screens/Forms/editItem/EditItemForm";
+import CategoryConfigScreen from "../screens/Forms/categoryConfig/CategoryConfigScreen";
 
 export default DashboardNavigator = StackNavigator({
 		DashboardScreen: {screen: DashboardScreen },
 		NewItemForm: {screen: NewItemForm},
 		NewGroupForm: {screen: NewItemGroupForm},
 		ItemsListScreen: {screen: ItemsListScreen},
-		EditItemForm: {screen: EditItemForm}
+		EditItemForm: {screen: EditItemForm},
+		CategoryConfigScreen: {screen: CategoryConfigScreen}
 	}, {
 		initialRouteName: 'DashboardScreen',
 		transitionConfig: () => ({

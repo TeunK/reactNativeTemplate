@@ -13,6 +13,15 @@ export default LocalDataStorage = {
 				})
 			})
 	},
+	update: (schema, instance) => {
+		console.log("UPDATING INTO ["+JSON.stringify(schema)+"] VALUES: "+JSON.stringify(instance, null, 2));
+		Realm.open({schema: [schema]})
+			.then(realm => {
+				realm.write(() => {
+					realm.create(schema.name, instance, true)
+				})
+			})
+	},
 	get: (schema) => {
 		console.log("GET * FROM ["+JSON.stringify(schema)+"]");
 		return Realm.open({schema: [schema]})

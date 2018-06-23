@@ -8,7 +8,8 @@ const projectName = "demoProject";
 
 export default Constants = {
 	localDataStorageTypes: {
-		item: "Item"
+		item: "Item",
+		category: "Category"
 	},
 	PictureDir: RNFetchBlob.fs.dirs.PictureDir + "/" + projectName
 }

@@ -21,5 +21,11 @@ export default ItemsService = {
 		} catch (err) {
 			alert(err);
 		}
+	},
+	updateCategory: async () => {
+
+	},
+	deleteCategory: async () => {
+
 	}
 };

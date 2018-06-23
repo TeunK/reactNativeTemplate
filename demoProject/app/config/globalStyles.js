@@ -12,17 +12,66 @@ const constants = {
 	xxl: 40
 };
 
+export const colors = {
+	white: '#FFF',
+
+	green1: "#168900",
+	green2: "#19ba00",
+	green3: "#9fff82",
+
+	red1: "#890000",
+	red2: "#c90000",
+	red3: "#d89688",
+
+	blue1: "#030089",
+	blue2: "#2f74f1",
+	blue3: "#a5afc2",
+
+
+};
+
 export default globalStyles = StyleSheet.create({
 
 	// POSITIONING
 	flex: {display:"flex"},
 	flexDirectionColumn: {flexDirection: 'column'},
 	flexDirectionRow: {flexDirection: 'row'},
+	flexVerticalCenter: {alignSelf: 'center'},
 
 	// TEXT ALIGNMENT
 	txtl: {textAlign:"left"},
 	txtm: {textAlign:"center"},
 	txtr: {textAlign:"right"},
+
+	// BACKGROUND COLOR
+	bgWhite: {backgroundColor: colors.white},
+
+	bgGreen1: {backgroundColor: colors.green1},
+	bgGreen2: {backgroundColor: colors.green2},
+	bgGreen3: {backgroundColor: colors.green3},
+
+	bgRed1: {backgroundColor: colors.red1},
+	bgRed2: {backgroundColor: colors.red2},
+	bgRed3: {backgroundColor: colors.red3},
+
+	bgBlue1: {backgroundColor: colors.blue1},
+	bgBlue2: {backgroundColor: colors.blue2},
+	bgBlue3: {backgroundColor: colors.blue3},
+
+	// COLOR
+	cWhite: {color: colors.white},
+
+	cGreen1: {color: colors.green1},
+	cGreen2: {color: colors.green2},
+	cGreen3: {color: colors.green3},
+
+	cRed1: {color: colors.red1},
+	cRed2: {color: colors.red2},
+	cRed3: {color: colors.red3},
+
+	cBlue1: {color: colors.blue1},
+	cBlue2: {color: colors.blue2},
+	cBlue3: {color: colors.blue3},
 
 	// FONT STYLE
 
@@ -69,6 +118,15 @@ export default globalStyles = StyleSheet.create({
 	h75: {height: 75},
 	h100: {height: 100},
 
+	// PADDING
+	p0: {padding: 0},
+	pxs: {padding: constants.xs},
+	ps: {padding: constants.s},
+	pm: {padding: constants.m},
+	pl: {padding: constants.l},
+	pxl: {padding: constants.xl},
+	pxxl: {padding: constants.xxl},
+
 	// MARGIN
 	mxs: {margin: constants.xs},
 	ms: {margin: constants.s},
@@ -78,6 +136,7 @@ export default globalStyles = StyleSheet.create({
 	mxxl: {margin: constants.xxl},
 
 	// MARGIN BOTTOM
+	m0: {margin: 0},
 	mbxs: {marginBottom: constants.xs},
 	mbs: {marginBottom: constants.s},
 	mbm: {marginBottom: constants.m},

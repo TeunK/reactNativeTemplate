@@ -4,16 +4,18 @@
 'use strict';
 
 import React from 'react';
-import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image, Picker} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, TouchableHighlight, Image, Picker, TouchableOpacity} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import customFormStyle from '../../../config/formStyles'
 import newItemsFormHeaderOptions from "../../../config/navigationOptionHeaders/newItemsFormHeaderOptions";
-import {Button, FormInput, FormLabel, FormValidationMessage} from "react-native-elements";
+import {Badge, Button, FormInput, FormLabel, FormValidationMessage, Icon} from "react-native-elements";
 import fileManager from "../../../lib/storage/fileManager";
 import itemRepository from "../../../domain/repository/items";
 import ItemsService from '../../../services/itemsService';
 import { withNavigationFocus } from '@patwoz/react-navigation-is-focused-hoc'
 import styles from "./styles";
+import Autocomplete from "react-native-autocomplete-input";
+import globalStyles from "../../../config/globalStyles";
 
 const options = {
 	stylesheet: customFormStyle,
@@ -50,6 +52,7 @@ class NewItemForm extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.nameInputRef = React.createRef();
 
 		let startState = emptyForm;
 
@@ -62,16 +65,20 @@ class NewItemForm extends React.Component {
 		this.state = {
 			formData: startState,
 			existingItemCategories: [],
-			categoryOptions: []
+			categoryInputString: ""
 		};
-
-		this.nameInputRef = React.createRef();
-		this.categoryInputRef = React.createRef();
 	};
 
 	componentDidMount() {
 		this.getCategories()
-			.then(() => {this.updateCategory("")});
+			.then(() => {
+				if (this.props.navigation.state.params.options.hasOwnProperty("category")) {
+					this.selectCategory(this.props.navigation.state.params.options.hasOwnProperty("category"));
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	}
 
 	getCategories = async () => {
@@ -92,10 +99,16 @@ class NewItemForm extends React.Component {
 		}
 	}
 
-	onPress = async () => {
+	onPressSave = async () => {
 		const data = this.state.formData;
 		if (data) {
 			try {
+				if (data.category === "" && this.state.categoryInputString !== "")
+				{
+					alert(this.state.categoryInputString);
+					data.category = this.state.categoryInputString;
+				}
+
 				const imageUri = await fileManager.writeToMemory(data.image);
 				if (imageUri) {
 					const itemDetails = {
@@ -109,7 +122,7 @@ class NewItemForm extends React.Component {
 					alert("Could not find imageName or imageDataString on image object");
 				}
 			} catch (err) {
-				alert("Err: "+err);
+				alert(err);
 			}
 		} else {
 			// validation failed
@@ -118,7 +131,6 @@ class NewItemForm extends React.Component {
 
 	clearForm = () => {
 		this.nameInputRef.clearText();
-		this.categoryInputRef.clearText();
 		this.setState(prevState => ({...prevState, formData: emptyForm }));
 	};
 
@@ -133,10 +145,6 @@ class NewItemForm extends React.Component {
 				console.log('ImagePicker Error: ', response.error);
 			}
 			else {
-
-				// You can also display the image using data:
-				// let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
 				this.setState((prevState) => ({...prevState, formData: { ...prevState.formData, image: response }}));
 			}
 		});
@@ -146,19 +154,10 @@ class NewItemForm extends React.Component {
 		this.setState((prevState) => ({...prevState, formData: {...prevState.formData, name: name}}));
 	};
 
-	updateCategory = (categoryQuery) => {
-		let categoryOptions = [];
-		this.state.existingItemCategories.forEach(category => {
-			if (category.toLowerCase().startsWith(categoryQuery.toLowerCase())) {
-				categoryOptions.push(category.toLowerCase());
-			}
-		});
-
-		this.setState(prevState => ({...prevState, categoryOptions: categoryOptions}));
-	};
-
-	selectCategory = (itemValue, itemIndex) => {
-		this.setState((prevState) => ({...prevState, formData: {...prevState.formData,category:itemValue}}))
+	selectCategory = (value) => {
+		let state = this.state;
+		state.formData.category = value;
+		this.setState(state);
 	};
 
 	render = () => {
@@ -169,18 +168,18 @@ class NewItemForm extends React.Component {
 				<FormInput onChangeText={this.updateName} ref={element => this.nameInputRef = element}/>
 				{this.state.formData.errors.name && <FormValidationMessage>Error message</FormValidationMessage>}
 
-				<FormInput onChangeText={this.updateCategory} ref={element => this.categoryInputRef = element}/>
 				<Picker
+					style={globalStyles.mbm}
 					selectedValue={this.state.formData.category}
 					prompt="Item Category"
 					onValueChange={this.selectCategory}>
-					{this.state.categoryOptions.map((categoryName, i) => <Picker.Item key={i} label={categoryName} value={categoryName}/>)}
+					{this.state.existingItemCategories.map((categoryName, i) => <Picker.Item key={i} label={categoryName} value={categoryName}/>)}
 				</Picker>
 
 				<Button title="Add Image" onPress={this.pickImage} buttonStyle={styles.button}/>
 				<Image source={this.state.formData.image} style={styles.previewImage} />
 
-				<Button title="Save" onPress={this.onPress} buttonStyle={styles.button} />
+				<Button title="Save" onPress={this.onPressSave} buttonStyle={styles.button} />
 			</View>
 		);
 	}

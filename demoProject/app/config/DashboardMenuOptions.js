@@ -10,10 +10,10 @@ export const dashboardMenuOptionsList = (scope) => [
 		}
 	},
 	{
-		title: 'Add Item Group',
+		title: 'Category Configurations',
 		icon: 'add',
 		clickFunction: () => {
-			scope.props.navigation.navigate('NewGroupForm');
+			scope.props.navigation.navigate('CategoryConfigScreen');
 		}
 	},
 	{
